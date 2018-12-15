@@ -53,6 +53,7 @@ for (n in 1:NTRI)
   xx = (1-ksi-eta)*r1[1]+ksi*r2[1]+eta*r3[1];
   yy = (1-ksi-eta)*r1[2]+ksi*r2[2]+eta*r3[2];
   
+  # These three lines will construct the local load vector if the right handside of the Poisson equation is 1. For example if the problem reads as $ laplace u = 1 $.
   F[1] = (1-ksi-eta)*det(J)*1/2;
   F[2] = (ksi)*det(J)*1/2;
   F[3] = (eta)*det(J)*1/2;
@@ -87,19 +88,13 @@ U = solve(Sparsity,LoadVect)
 
 
 
-# The following commands will return out put that can be processed on any external software like MATLAB etc. 
+# The following commands will return out put that can be processed on any external software like MATLAB for visualisation. The file 'plotsolution.m' is an example of how to obtain visualisation of the solution surface.  
 
 
-write.table(x,file="/Users/sarfaraw/Desktop/PoiSolver/xcoordates.txt",row.names=FALSE,col.names=FALSE)
-write.table(y,file="/Users/sarfaraw/Desktop/PoiSolver/ycoordates.txt",row.names=FALSE,col.names=FALSE)
-write.table(U,file="/Users/sarfaraw/Desktop/PoiSolver/Solutions.txt",row.names=FALSE,col.names=FALSE)
-write.table(LocNodes,file="/Users/sarfaraw/Desktop/PoiSolver/triangles.txt",row.names=FALSE,col.names=FALSE)
+write.table(x,file="./xcoordates.txt",row.names=FALSE,col.names=FALSE)
+write.table(y,file="./ycoordates.txt",row.names=FALSE,col.names=FALSE)
+write.table(U,file="./Solutions.txt",row.names=FALSE,col.names=FALSE)
+write.table(LocNodes,file="./triangles.txt",row.names=FALSE,col.names=FALSE)
 
-
-
-#write.table(x,file="/path/to/where/you/want/to/write/xcoordates.txt",row.names=FALSE,col.names=FALSE)
-#write.table(y,file="/path/to/where/you/want/to/write/ycoordates.txt",row.names=FALSE,col.names=FALSE)
-#write.table(U,file="/path/to/where/you/want/to/write/Solutions.txt",row.names=FALSE,col.names=FALSE)
-#write.table(LocNodes,file="/path/to/where/you/want/to/write/triangles.txt",row.names=FALSE,col.names=FALSE)
 
 
