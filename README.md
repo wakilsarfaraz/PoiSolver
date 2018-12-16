@@ -5,4 +5,4 @@ Consider a two dimensional bounded convex domain in the form <img src="https://l
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;\Delta\,u(x,y)=f(x,y)"/> 
 in <img src="https://latex.codecogs.com/svg.latex?\Large&space;\Omega"/> 
 and 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;u(x,y)=0"/> on <img src="https://latex.codecogs.com/svg.latex?\Large&space;\partial\Omega"/>. 
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;u(x,y)=0"/> on <img src="https://latex.codecogs.com/svg.latex?\Large&space;\partial\Omega"/>. Let <img src="https://latex.codecogs.com/svg.latex?\Large&space;H^1_E=\{w\in\,H^1:\|w(x,y)\|^2<\infty,\,\|\nabla\,w(x,y)\|^2<\infty\}"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;H^1_E_0=\{w\in\,H^1:\,w(x,y)=0,/,x,y\in\partial\Omega\}"/>
