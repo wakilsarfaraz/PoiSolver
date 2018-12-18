@@ -9,15 +9,24 @@ The first 11 lines of the code mainly assign numerical values for variables to b
 ``` r 
 L = 1
 ```
-, which stores the value for the side length of <img src="https://latex.codecogs.com/svg.latex?\Large&space;\Omega"/>. The current code is implemented so that it only works for rectangular domains that have the same side lengths i.e. square only. The variable ``` r N = 50``` is the mesh refinement controlling parameter i.e. it is the number of points that descritises `L`.
+, which stores the value for the side length of <img src="https://latex.codecogs.com/svg.latex?\Large&space;\Omega"/>. The current code is implemented so that it only works for rectangular domains that have the same side lengths i.e. square only. The variable 
+``` r
+N = 50
+``` 
+is the mesh refinement controlling parameter i.e. it is the number of points that discretises `L`. The line 
+``` r
+X = seq(0,L,len=N+1)
+```
+is equivalent to `linspace` function in MATLAB. It outputs the actual values of the `N+1` grid points. We can creat a quadrilateral grid that consists of <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> points each of which is equipped with the <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/> numerical values for the coordinates.  
+
 
 ``` r
-L = 1
-N = 50
-X = seq(0,L,len=N+1)
 m = length(X); n=length(X);
 x = matrix(rep(X,each=n),nrow=n);
 y = matrix(rep(X,m),nrow=n)
+```
+
+``` r
 x = c(x)
 y = c(y)
 GNodes = (N+1)^2
