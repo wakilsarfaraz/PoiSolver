@@ -13,8 +13,8 @@ y = matrix(rep(X,m),nrow=n)
 x = c(x)
 y = c(y)
 GNodes = (N+1)^2
-NTRI = 2*N^2
-LocNodes = matrix(0,NTRI,3)
+NumTRI = 2*N^2
+LocNodes = matrix(0,NumTRI,3)
 
 for (i in 1:N){
 	for (j in 1:N){
@@ -31,7 +31,7 @@ Sparsity <- matrix(0, GNodes, GNodes)
 LoadVect = matrix(0, GNodes, 1)
 
 
-for (n in 1:NTRI)
+for (n in 1:NumTRI)
 	{
 	r1 = matrix(c(x[LocNodes[n,1]],y[LocNodes[n,1]]),nrow=2, byrow=FALSE)
   r2 = matrix(c(x[LocNodes[n,2]],y[LocNodes[n,2]]),nrow=2, byrow=FALSE);
@@ -53,18 +53,18 @@ for (n in 1:NTRI)
   xx = (1-ksi-eta)*r1[1]+ksi*r2[1]+eta*r3[1];
   yy = (1-ksi-eta)*r1[2]+ksi*r2[2]+eta*r3[2];
   
-  # These three lines will construct the local load vector if the right handside of the Poisson equation is 1. For example if the problem reads as $ laplace u = 1 $.
+  # These three lines will construct the local load vector if the right hand-side of the Poisson equation is 1. For example if the problem reads as $ laplace u = 1 $.
+
+
   F[1] = (1-ksi-eta)*det(J)*1/2;
   F[2] = (ksi)*det(J)*1/2;
   F[3] = (eta)*det(J)*1/2;
+
+  # These three lines will construct the local load vector if the right hand-side of the Poisson equation is an eigenfunction of the Laplace operator. For example if the problem reads as $ laplace u = sin(pi *x)sin(2*pi*y) $.
   
   # F[1] = (1-ksi-eta)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
   # F[2] = (ksi)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
   # F[3] = (eta)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
-  
-  # F[1] = pi^2*((1-ksi-eta)*det(J)*(1/2))*(yy*sin(2*pi*xx)+xx*sin(2*pi*yy));
-  # F[2] = pi^2*((ksi)*det(J)*(1/2))*(yy*sin(2*pi*xx)+xx*sin(2*pi*yy));
-  # F[3] = pi^2*((eta)*det(J)*(1/2))*(yy*sin(2*pi*xx)+xx*sin(2*pi*yy));
 
   
   for (i in 1:3){
