@@ -1,9 +1,4 @@
-# library(plotly)
-# library(ggplot2)
-# library(geometry)
-# library(geomorph)
-
-
+# This script solves Poisson equation using the finite element method. See the documentation for the theory and implementation.
 L = 1
 N = 50
 X = seq(0,L,len=N+1)
