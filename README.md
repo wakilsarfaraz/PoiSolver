@@ -17,18 +17,19 @@ is the mesh refinement controlling parameter i.e. it is the number of points tha
 ``` r
 X = seq(0,L,len=N+1)
 ```
-is equivalent to `linspace` function in MATLAB. It outputs the actual values of the `N+1` grid points. We can creat a quadrilateral grid that consists of <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> points each of which is equipped with the <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/> numerical values for the coordinates.  
-
-
+is equivalent to `linspace` function in MATLAB. It outputs the actual values of the `N+1` grid points. We can creat a quadrilateral grid that consists of <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> points each of which is equipped with the <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/> numerical values for the coordinates in two matrices namely `x` and `y`, which were obtained using the following built-in functions of R.   
 ``` r
 m = length(X); n=length(X);
 x = matrix(rep(X,each=n),nrow=n);
 y = matrix(rep(X,m),nrow=n)
 ```
-
+Now we reshape the matrices <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/> with numerical values for coordinates of points in to column vectors, which is accomplished using 
 ``` r
 x = c(x)
 y = c(y)
+```
+The variables `GNodes` is meant to stand for Global Nodes and it is instantiated in terms of `N`. The variable `NumTRI` stores the number of triangles that a discretisation of this type outputs. If we have <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> quadrilateral elements and each square is divided by two triangles we obtain <img src="https://latex.codecogs.com/svg.latex?\Large&space;2\times\,N^2"/> triangles. The array `LocNodes` stores the connectivity array and we note that it is a matrix with `NumTRI` rows and 3 columns.
+``` r
 GNodes = (N+1)^2
 NumTRI = 2*N^2
 LocNodes = matrix(0,NumTRI,3)
