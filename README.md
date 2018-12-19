@@ -28,13 +28,25 @@ Now we reshape the matrices <img src="https://latex.codecogs.com/svg.latex?\Larg
 x = c(x)
 y = c(y)
 ```  
-The variables `GNodes` is meant to stand for Global Nodes and it is instantiated in terms of `N`. The variable `NumTRI` stores the number of triangles that a discretisation of this type outputs. If we have <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> quadrilateral elements and each square is divided by two triangles we obtain <img src="https://latex.codecogs.com/svg.latex?\Large&space;2\times\,N^2"/> triangles. The array `LocNodes` stores the connectivity array and we note that it is a matrix with `NumTRI` rows and 3 columns.
+The variables `GNodes` is meant to stand for Global Nodes and it is instantiated in terms of `N`. The variable `NumTRI` stores the number of triangles that a discretisation of this type outputs. If we have <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> quadrilateral elements and each square is divided by two triangles we obtain <img src="https://latex.codecogs.com/svg.latex?\Large&space;2\times\,N^2"/> triangles. The array `LocNodes` stores the connectivity array of the vertices of all the triangles, hence it is a matrix with `NumTRI` rows and 3 columns.
 ``` r
 GNodes = (N+1)^2
 NumTRI = 2*N^2
 LocNodes = matrix(0,NumTRI,3)
 ```
-
+Triangulation of the domain is obtained such that the vertices of each triangle is locally counted in anti-clock orientation and such that the local counting of vertices of each triangle fills the global connectivity array `LocNodes` in the correct order. To achieve this we need a nested for loop which is given by 
+``` r
+for (i in 1:N){
+	for (j in 1:N){
+		    LocNodes[i+2*(j-1)*N,1] = i+(j-1)*(N+1)
+        LocNodes[i+2*(j-1)*N,2] = i+j*(N+1)
+        LocNodes[i+2*(j-1)*N,3] = (i+1)+(j-1)*(N+1)
+        LocNodes[i+N+2*(j-1)*N,1] = i+1+j*(N+1)
+        LocNodes[i+N+2*(j-1)*N,2] = (i+1)+(j-1)*(N+1)
+        LocNodes[i+N+2*(j-1)*N,3] = i+j*(N+1)
+    }
+}
+```
 
 
 
