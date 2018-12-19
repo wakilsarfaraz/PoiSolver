@@ -34,7 +34,7 @@ GNodes = (N+1)^2
 NumTRI = 2*N^2
 LocNodes = matrix(0,NumTRI,3)
 ```
-Triangulation of the domain is obtained such that the vertices of each triangle is locally counted in anti-clock orientation and such that the local counting of vertices of each triangle fills the global connectivity array `LocNodes` in the correct order. To achieve this we need a nested for loop which is given by 
+Triangulation of the domain is obtained such that the vertices of each triangle is locally counted in anti-clockwise orientation and such that the local counting of vertices of each triangle fills the global connectivity array `LocNodes` in the correct order. To achieve this we need a nested for loop which is given by 
 ``` r
 for (i in 1:N){
 	for (j in 1:N){
@@ -47,6 +47,7 @@ for (i in 1:N){
     }
 }
 ```
+We need to introduce two types of global arrays namely a system matrix `Sparsity` and a right hand-side vector `LoadVect`, which must be of size <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2\timesN^2"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2\times\,1"/> respectively.
 
 
 
