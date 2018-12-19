@@ -1,3 +1,4 @@
+
 coordx = importdata('xcoordates.txt');
 coordy = importdata('ycoordates.txt');
 triangles = importdata('triangles.txt');
