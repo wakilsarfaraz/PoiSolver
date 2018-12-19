@@ -47,7 +47,7 @@ for (i in 1:N){
     }
 }
 ```
-We need to introduce two types of global arrays namely a system matrix `Sparsity` and a right hand-side vector `LoadVect`, which must be of size <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2\times\,N^2"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2\times\,1"/> respectively.
+We need to introduce two types of global arrays namely a system matrix `Sparsity` and a right hand-side vector `LoadVect`, which must be of size <img src="https://latex.codecogs.com/svg.latex?\Large&space;(N+1)^2\times\,(N+1)^2"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2\times\,1"/> respectively.
 
 
 
