@@ -145,5 +145,5 @@ xlabel('x','fontsize',16)
 ylabel('y','fontsize',16)
 zlabel('U','fontsize',16)
 ```
-Note that `shading interp` removes the lines of triangulation from the surface plot. If it is desired to see the triangulation line on the surface plot, then it can be commented out using `%`.  
+Note that `shading interp` removes the lines of triangulation from the surface plot. If it is desired to see the triangulation line on the surface plot, then it can be commented out using `%`.  The first ![Figure](Smooth.pdf "s") shows the solution surface without the triangulation lines appearing on the surface. The ![Figure](triangulated.pdf "t") shows the solution surface with the triangulation lines showing on the surface.
 
