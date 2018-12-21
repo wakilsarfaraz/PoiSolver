@@ -128,7 +128,7 @@ write.table(U,file="./Solutions.txt",row.names=FALSE,col.names=FALSE)
 write.table(LocNodes,file="./triangles.txt",row.names=FALSE,col.names=FALSE)
 ```
 ## Visualisation on MATLAB
-The current instant of the output produced by PoiSolver is plotted using MATLAB and the four text files of data that are produced by PoiSolver are called from within a MATLAB script called `plottingsolution.m`. The first four lines of this script 
+The current instant of the output produced by PoiSolver is plotted using MATLAB and the four text files of data that are produced by PoiSolver are called from within a MATLAB script called `plotsolution.m`. The first four lines of this script 
 ``` matlab
 coordx = importdata('xcoordates.txt');
 coordy = importdata('ycoordates.txt');
@@ -145,5 +145,5 @@ xlabel('x','fontsize',16)
 ylabel('y','fontsize',16)
 zlabel('U','fontsize',16)
 ```
-Note that `shading interp` removes the lines of triangulation from the surface plot. If it is desired to see the triangulation line on the surface plot, then it can be commented out using `%`. The first 
+Note that `shading interp` removes the lines of triangulation from the surface plot. If it is desired to see the triangulation line on the surface plot, then it can be commented out using `%`.  
 
