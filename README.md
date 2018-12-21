@@ -55,7 +55,7 @@ LoadVect = matrix(0, GNodes, 1)
 The next segment of code is a for loop that executes a series of computations on each one of the triangles. It starts with 
 ``` r
 for (n in 1:NumTRI)
-	{# for loop starts here
+	{# This is the start of the for loop on all triangles
 ```
 The first part within the loop defines the local position vectors `r1`, `r2`, and `r3` in terms of `x` and `y` coordinate values through which we refer to different vertices of each triangle. 
 ``` r
@@ -101,5 +101,17 @@ We further need to calculate the contribution of the local load vector `F` and t
   for (i in 1:3){
     LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
     }
+# This is the end of the for loop on all triangles
+ }
+```
+Next we need to implement the prescribed boundary conditions of Dirichlet type. We impose the boundary conditions through placing instructions on the entries of `Spartsity` and `LoadVect`. Note that the `if` statement explicitly specifies the nodes for which either `x,y = 0` or `x,y = L` must be treated as the boundary node. The code to implement boundary condition is given by 
+``` r
+for (i in 1:GNodes){
+if (x[i]==0 | y[i]==0 | x[i]==L | y[i]==L){
+    LoadVect[i] = 0
+    Sparsity[i,] = 0
+    Sparsity[i,i] = 1
+     }
+}
 ```
 
