@@ -76,7 +76,7 @@ J = matrix(c(r2[1]-r1[1],r2[2]-r1[2]
     ,r3[1]-r1[1],r3[2]-r1[2]), nrow=2, byrow=TRUE) 
 ```
 The Jacobian of the mapping namely `J` serves to reduce the computational cost by a significant amount, particularly due to a property of integration for computing the integral of a function on a reference domain with a given mapping between  the arbitrary domain and the reference domain. Further details on this topic can be found on [Integral domain transformation](http://www.iue.tuwien.ac.at/phd/nentchev/node58.html). 
-The variable name `Astiff` is the local <img src="https://latex.codecogs.com/svg.latex?\Large&space;3\times3"/> stiffness matrix, for which the computation is executed and looped over all triangles.
+The variable name `Astiff` is the local <img src="https://latex.codecogs.com/svg.latex?\Large&space;3\times3"/> stiffness matrix, which is computed and looped over all the triangles.
 ``` r
  Astiff = (1/(2*det(J)))*matrix(c(sum((r2-r3)*(r2-r3))
           ,sum((r2-r3)*(r3-r1)),sum((r2-r3)*(r1-r2))
