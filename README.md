@@ -55,7 +55,7 @@ LoadVect = matrix(0, GNodes, 1)
 The next segment of code is a for loop that executes a series of computations on each one of the triangles. It starts with 
 ``` r
 for (n in 1:NumTRI)
-	{
+	{# for loop starts here
 ```
 The first part within the loop defines the local position vectors `r1`, `r2`, and `r3` in terms of `x` and `y` coordinate values through which we refer to different vertices of each triangle. 
 ``` r
