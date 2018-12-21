@@ -84,6 +84,22 @@ for (i in 1:3){
         Sparsity[LocNodes[n,i],LocNodes[n,j]]=Sparsity[LocNodes[n,i],LocNodes[n,j]]+Astiff[i,j]
       }
     }
- ```
-
+```
+We need to introduce the coordinate names for axes on reference triangle, which are required to be equipped with a transformation (mapping) formula between variables (`x`, `y`) to variables (`xx`,`yy`). The values of the variables `ksi` and `eta` are related to quadrature formula.  This mapping is given by 
+``` r
+  ksi = 1/3;
+  eta = 1/3;
+  xx = (1-ksi-eta)*r1[1]+ksi*r2[1]+eta*r3[1];
+  yy = (1-ksi-eta)*r1[2]+ksi*r2[2]+eta*r3[2];
+```
+We further need to calculate the contribution of the local load vector `F` and then for the value to be correctly positioned as an entry of the global load vector namely `LoadVect`. The following lines provide the code to accomplish this. Note that for any function on the right hand-side of the equation (other than 1 in the current example) this is where the code will need changing, because this is where the local load vector is constructed.
+``` r 
+  F[1] = (1-ksi-eta)*det(J)*1/2;
+  F[2] = (ksi)*det(J)*1/2;
+  F[3] = (eta)*det(J)*1/2;
+  
+  for (i in 1:3){
+    LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
+    }
+    ```
 
