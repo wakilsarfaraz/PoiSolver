@@ -135,7 +135,7 @@ coordy = importdata('ycoordates.txt');
 triangles = importdata('triangles.txt');
 numsol = importdata('Solutions.txt');
 ```
-imports the data from the output files of `PoiSolver.r`. Then the in-built MATLAB function `trisurf` can be used to visualise the solution using these lines of code.
+import the data from the output files of `PoiSolver.r`. Then the in-built MATLAB function `trisurf` can be used to visualise the solution using these lines of code.
 ``` matlab
 figure(1)
 trisurf(triangles,coordx,coordy,numsol)
