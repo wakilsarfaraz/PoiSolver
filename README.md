@@ -77,6 +77,13 @@ The variable name `Astiff` is the local <img src="https://latex.codecogs.com/svg
           ,sum((r3-r1)*(r1-r2)),sum((r2-r3)*(r1-r2))
           ,sum((r3-r1)*(r1-r2)),sum((r1-r2)*(r1-r2))), nrow=3, byrow=TRUE);
 ```
-
+A nested loop (within the main loop over all triangles) is required to place the contributions from all the local stiffness matrices `Astiff` into the correct position in terms of entries of global stiffness matrix i.e. into the `Sparsity`. This is coded as
+``` r
+for (i in 1:3){
+      for (j in 1:3){
+        Sparsity[LocNodes[n,i],LocNodes[n,j]]=Sparsity[LocNodes[n,i],LocNodes[n,j]]+Astiff[i,j]
+      }
+    }
+ ```
 
 
