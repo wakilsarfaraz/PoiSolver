@@ -114,4 +114,16 @@ if (x[i]==0 | y[i]==0 | x[i]==L | y[i]==L){
      }
 }
 ```
+Finally the line 
+``` r
+U = solve(Sparsity,LoadVect)
+```
+solves the linear system and stores the values of the numerical solution at each node in the variable `U`. 
 
+The next step is to write and store the numerical solution `U` and other files that are necessary for visualisation of the solution. These consist of a vector storing the coordinates of x axis, a vector that stores coordinates of y axis and a connectivity array that is usually essential for triangular surface plots for visualisation. These four lines of code will write and store these four data files in the current directory.
+``` r
+write.table(x,file="./xcoordates.txt",row.names=FALSE,col.names=FALSE)
+write.table(y,file="./ycoordates.txt",row.names=FALSE,col.names=FALSE)
+write.table(U,file="./Solutions.txt",row.names=FALSE,col.names=FALSE)
+write.table(LocNodes,file="./triangles.txt",row.names=FALSE,col.names=FALSE)
+```
