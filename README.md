@@ -101,5 +101,5 @@ We further need to calculate the contribution of the local load vector `F` and t
   for (i in 1:3){
     LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
     }
-    ```
+```
 
