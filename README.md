@@ -59,7 +59,7 @@ We need to introduce two types of global arrays namely a system matrix `Sparsity
 Sparsity <- matrix(0, GNodes, GNodes)
 LoadVect = matrix(0, GNodes, 1)
 ```
-The next segment of code is a for loop that executes a series of computations on each one of the triangles. The first part within the loop presents defining the local position vectors through which we refer to different vertices of each triangle. The second part within the loop defines a <img src="https://latex.codecogs.com/svg.latex?\Large&space;2\times2"/> jacobian matrix for the mapping from arbitrary triangle to a reference triangle that has vertices in order <img src="https://latex.codecogs.com/svg.latex?\Large&space;(0,0),\!(1,0)"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;(0,1)"/>.
+The next segment of code is a for loop that executes a series of computations on each one of the triangles. The first part within the loop presents defining the local position vectors through which we refer to different vertices of each triangle. The second part within the loop defines a <img src="https://latex.codecogs.com/svg.latex?\Large&space;2\times2"/> jacobian matrix `J` for the mapping from arbitrary triangle to a reference triangle that has vertices in order <img src="https://latex.codecogs.com/svg.latex?\Large&space;(0,0),\!(1,0)"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;(0,1)"/>.
 
 
 
