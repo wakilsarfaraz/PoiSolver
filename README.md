@@ -64,7 +64,7 @@ The next segment of code is a for loop that executes a series of computations on
 for (n in 1:NumTRI)
 	{
 ```
-The first part within the loop defines the local position vectors `r1`, `r2`, and `r3` in terms of `x` and `y`y coordinate values through which we refer to different vertices of each triangle. 
+The first part within the loop defines the local position vectors `r1`, `r2`, and `r3` in terms of `x` and `y` coordinate values through which we refer to different vertices of each triangle. 
 ``` r
 r1 = matrix(c(x[LocNodes[n,1]],y[LocNodes[n,1]]),nrow=2, byrow=FALSE)
 r2 = matrix(c(x[LocNodes[n,2]],y[LocNodes[n,2]]),nrow=2, byrow=FALSE);
