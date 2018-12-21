@@ -54,13 +54,6 @@ for (n in 1:NumTRI)
   F[1] = (1-ksi-eta)*det(J)*1/2;
   F[2] = (ksi)*det(J)*1/2;
   F[3] = (eta)*det(J)*1/2;
-
-  # These three lines will construct the local load vector if the right hand-side of the Poisson equation is an eigenfunction of the Laplace operator. For example if the problem reads as $ laplace u = sin(pi *x)sin(2*pi*y) $.
-  
-  # F[1] = (1-ksi-eta)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
-  # F[2] = (ksi)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
-  # F[3] = (eta)*5*pi^2*sin(pi*xx)*sin(2*pi*yy)*det(J)*1/2;
-
   
   for (i in 1:3){
     LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
@@ -83,9 +76,8 @@ U = solve(Sparsity,LoadVect)
 
 
 
-# The following commands will return out put that can be processed on any external software like MATLAB for visualisation. The file 'plotsolution.m' is an example of how to obtain visualisation of the solution surface.  
-
-
+# Writing and storing the output files of data, which is a vector containing the coordinates of x, a vector that stores coordinates of y, a vector that stores the finite element approximate numerical solution and finally a connectivity array that is usually essential for triangular surface plots for visualisation.
+ 
 write.table(x,file="./xcoordates.txt",row.names=FALSE,col.names=FALSE)
 write.table(y,file="./ycoordates.txt",row.names=FALSE,col.names=FALSE)
 write.table(U,file="./Solutions.txt",row.names=FALSE,col.names=FALSE)
