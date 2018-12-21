@@ -128,10 +128,22 @@ write.table(U,file="./Solutions.txt",row.names=FALSE,col.names=FALSE)
 write.table(LocNodes,file="./triangles.txt",row.names=FALSE,col.names=FALSE)
 ```
 ## Visualisation on MATLAB
-The current instant of the output produced by PoiSolver is plotted using MATLAB and the four text files of data that are produced by PoiSolver are called from within a MATLAB script called `plottingsolution.m`. The first four lines of this script are 
+The current instant of the output produced by PoiSolver is plotted using MATLAB and the four text files of data that are produced by PoiSolver are called from within a MATLAB script called `plottingsolution.m`. The first four lines of this script 
 ``` matlab
 coordx = importdata('xcoordates.txt');
 coordy = importdata('ycoordates.txt');
 triangles = importdata('triangles.txt');
 numsol = importdata('Solutions.txt');
 ```
+imports the data from the output files of `PoiSolver.r`. Then the in-built MATLAB function `trisurf` can be used to visualise the solution using these lines of code.
+``` matlab
+figure(1)
+trisurf(triangles,coordx,coordy,numsol)
+shading interp
+title('Finite element solution','fontsize',20)
+xlabel('x','fontsize',16)
+ylabel('y','fontsize',16)
+zlabel('U','fontsize',16)
+```
+.
+
