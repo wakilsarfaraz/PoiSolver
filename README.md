@@ -48,7 +48,9 @@ for (i in 1:N){
 }
 ```
 This piece of code returns a triangulated <img src="https://latex.codecogs.com/svg.latex?\Large&space;\Omega^h"/>, that looks like
-![Figure](mesh.png "s"), however, the instruction return this particular Figure is not included in the script, since the graphical output in this case scenario does not form the essence of the objectives. The Figure is here purely for visualisation of the mesh. 
+![Figure](mesh.png "s"),
+
+however, the instruction return this particular Figure is not included in the script, since the graphical output in this case scenario does not form the essence of the objectives. The Figure is here purely for visualisation of the mesh. 
 We need to introduce two types of global arrays namely a system matrix `Sparsity` and a right hand-side vector `LoadVect`, which must be of size <img src="https://latex.codecogs.com/svg.latex?\Large&space;(N+1)^2\times\,(N+1)^2"/> and <img src="https://latex.codecogs.com/svg.latex?\Large&space;(N+1)^2\times\,1"/> respectively. These are introduced by 
 ``` r
 Sparsity <- matrix(0, GNodes, GNodes)
