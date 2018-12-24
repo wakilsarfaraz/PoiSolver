@@ -17,7 +17,7 @@ is the mesh refinement controlling parameter i.e. it is the number of points tha
 ``` r
 X = seq(0,L,len=N+1)
 ```
-is equivalent to `linspace` function in MATLAB. It outputs the actual values of the `N+1` grid points. We can creat a quadrilateral grid that consists of <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> points each of which is equipped with the <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/> numerical values for the coordinates in two matrices namely `x` and `y`, which were obtained using the following built-in functions of R.   
+is equivalent to `linspace` function in MATLAB. It outputs the actual values of the `N+1` grid points. We can creat a quadrilateral grid that consists of <img src="https://latex.codecogs.com/svg.latex?\Large&space;N^2"/> points each of which is equipped with the numerical values of <img src="https://latex.codecogs.com/svg.latex?\Large&space;(x,y)"/>, for the coordinates in two matrices namely `x` and `y`, which were obtained using the following built-in functions of R.   
 ``` r
 m = length(X); n=length(X);
 x = matrix(rep(X,each=n),nrow=n);
