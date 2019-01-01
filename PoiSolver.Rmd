@@ -53,12 +53,12 @@ LocNodes = matrix(0,NumTRI,3)
 ``` r
 for (i in 1:N){
   for (j in 1:N){
-		    LocNodes[i+2*(j-1)*N,1] = i+(j-1)*(N+1)
-        LocNodes[i+2*(j-1)*N,2] = i+j*(N+1)
-        LocNodes[i+2*(j-1)*N,3] = (i+1)+(j-1)*(N+1)
-        LocNodes[i+N+2*(j-1)*N,1] = i+1+j*(N+1)
-        LocNodes[i+N+2*(j-1)*N,2] = (i+1)+(j-1)*(N+1)
-        LocNodes[i+N+2*(j-1)*N,3] = i+j*(N+1)
+    LocNodes[i+2*(j-1)*N,1] = i+(j-1)*(N+1)
+    LocNodes[i+2*(j-1)*N,2] = i+j*(N+1)
+    LocNodes[i+2*(j-1)*N,3] = (i+1)+(j-1)*(N+1)
+    LocNodes[i+N+2*(j-1)*N,1] = i+1+j*(N+1)
+    LocNodes[i+N+2*(j-1)*N,2] = (i+1)+(j-1)*(N+1)
+    LocNodes[i+N+2*(j-1)*N,3] = i+j*(N+1)
     }
 }
 ```
@@ -80,9 +80,9 @@ for (n in 1:NumTRI)
 ```
   * The first part within the loop defines the local position          vectors   `r1`, `r2`, and `r3` in terms of `x` and `y`             coordinate values     through which we refer to different          vertices of each triangle. 
 ``` r
-  r1 = matrix(c(x[LocNodes[n,1]],y[LocNodes[n,1]]),nrow=2,           byrow=FALSE)
-  r2 = matrix(c(x[LocNodes[n,2]],y[LocNodes[n,2]]),nrow=2,           byrow=FALSE);
-  r3 = matrix(c(x[LocNodes[n,3]],y[LocNodes[n,3]]),nrow=2,           byrow=FALSE);
+  r1 = matrix(c(x[LocNodes[n,1]],y[LocNodes[n,1]]),nrow=2,byrow=FALSE)
+  r2 = matrix(c(x[LocNodes[n,2]],y[LocNodes[n,2]]),nrow=2,byrow=FALSE);
+  r3 = matrix(c(x[LocNodes[n,3]],y[LocNodes[n,3]]),nrow=2,byrow=FALSE);
 ```
   - The second part within the loop defines a $2\times2$ Jacobian        matrix `J` for the mapping from an arbitrary triangle in           $\Omega^h$ to a reference triangle that has vertices in order      $(0,0),\!(1,0)$ and $(0,1)$.
 ``` r
@@ -91,45 +91,44 @@ for (n in 1:NumTRI)
     The Jacobian of the mapping namely `J` serves to reduce the        computational cost by a significant amount, particularly due to     a property of integration for computing the integral of a          function on a reference domain with a given mapping between        the arbitrary domain and the reference domain. Further details     on this topic can be found on [Integral domain transformation](http://www.iue.tuwien.ac.at/phd/nentchev/node58.html). 
   - The variable name `Astiff` is the local $3\times3$ stiffness     matrix, which is computed and looped over all the triangles.
 ``` r
-Astiff = (1/(2*det(J)))*matrix(c(sum((r2-r3)*(r2-r3))
-          ,sum((r2-r3)*(r3-r1)),sum((r2-r3)*(r1-r2))
-          ,sum((r2-r3)*(r3-r1)),sum((r3-r1)*(r3-r1))
-          ,sum((r3-r1)*(r1-r2)),sum((r2-r3)*(r1-r2))
-          ,sum((r3-r1)*(r1-r2)),sum((r1-r2)*(r1-r2))), nrow=3,byrow=TRUE);
+Astiff = (1/(2*det(J)))*matrix(c(sum((r2-r3)*(r2-r3)),sum((r2-r3)*(r3-r1)),sum((r2-r3)*(r1-r2)),
+sum((r2-r3)*(r3-r1)),sum((r3-r1)*(r3-r1)),sum((r3-r1)*(r1-r2)),
+sum((r2-r3)*(r1-r2)),sum((r3-r1)*(r1-r2)),sum((r1-r2)*(r1-r2))), 
+nrow=3,byrow=TRUE);
 ```
   - A nested loop (within the main loop over all triangles) is         required to place the contributions from all the local             stiffness matrices `Astiff` into the correct position in terms     of entries of global stiffness matrix i.e. into the `Sparsity`.     This is coded as
 ``` r
 for (i in 1:3){
-      for (j in 1:3){
-        Sparsity[LocNodes[n,i],LocNodes[n,j]]=Sparsity[LocNodes[n,i],LocNodes[n,j]]+Astiff[i,j]
-      }
+    for (j in 1:3){
+      Sparsity[LocNodes[n,i],LocNodes[n,j]]=Sparsity[LocNodes[n,i],LocNodes[n,j]]+Astiff[i,j]
     }
+  }
 ```
   - We need to introduce the coordinate names for axes on reference     triangle, which are required to be equipped with a                 transformation (mapping) formula between variables (`x`, `y`)      to variables (`xx`,`yy`). The values of the variables `ksi` and     `eta` are related to quadrature formula.  This mapping is given     by 
 ``` r
-  ksi = 1/3;
-  eta = 1/3;
-  xx = (1-ksi-eta)*r1[1]+ksi*r2[1]+eta*r3[1];
- yy = (1-ksi-eta)*r1[2]+ksi*r2[2]+eta*r3[2];
+ksi = 1/3;
+eta = 1/3;
+xx = (1-ksi-eta)*r1[1]+ksi*r2[1]+eta*r3[1];
+yy = (1-ksi-eta)*r1[2]+ksi*r2[2]+eta*r3[2];
 ```
   - We further need to calculate the contribution of the local load     vector `F` and then for the value to be correctly positioned as     an entry of the global load vector namely `LoadVect`. The          following lines provide the code to accomplish this. Note that     for any function on the right hand-side of the equation (other     than 1 in the current example) this is where the code will need     changing, because this is where the local load vector is           constructed.
 ``` r 
-  F[1] = (1-ksi-eta)*det(J)*1/2;
-  F[2] = (ksi)*det(J)*1/2;
-  F[3] = (eta)*det(J)*1/2;
-  for (i in 1:3){
-    LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
-    }
-# This is the end of the for loop on all triangles
+F[1] = (1-ksi-eta)*det(J)*1/2;
+F[2] = (ksi)*det(J)*1/2;
+F[3] = (eta)*det(J)*1/2;
+for (i in 1:3){
+  LoadVect[LocNodes[n,i]] = LoadVect[LocNodes[n,i]]+ F[i]
   }
+# This is the end of the for loop on all triangles
+}
 ```
 10. Next we need to implement the prescribed boundary conditions of     Dirichlet type. We impose the boundary conditions through          placing instructions on the entries of `Spartsity` and             `LoadVect`. Note that the `if` statement explicitly specifies      the nodes for which either `x,y = 0` or `x,y = L` must be          treated as the boundary node. The code to implement boundary       condition is given by 
 ``` r
 for (i in 1:GNodes){
 if (x[i]==0 | y[i]==0 | x[i]==L | y[i]==L){
-    LoadVect[i] = 0
-    Sparsity[i,] = 0
-    Sparsity[i,i] = 1
+  LoadVect[i] = 0
+  Sparsity[i,] = 0
+  Sparsity[i,i] = 1
      }
 }
 ```
